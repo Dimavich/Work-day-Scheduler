@@ -4,16 +4,7 @@ var today = $('#currentDay');
 var date = moment().format('MMMM Do YYYY');
 var currentTime = parseInt(moment().format('H'));
 var timeBlock = $('.time-block');
-var nine = ($('#9').children('textarea').val());
-var ten = ($('#10').children('textarea').val());
-var eleven = ($('#11').children('textarea').val());
-var twelve = ($('#12').children('textarea').val());
-var thirteen = ($('#13').children('textarea').val());
-var fourteen = ($('#14').children('textarea').val());
-var fiveteen = ($('#15').children('textarea').val());
-var sixteen = ($('#16').children('textarea').val());
-var seventeen = ($('#17').children('textarea').val());
-var text = document.querySelectorAll('textarea');
+var text = $('textarea');
 
 //display current day
 today.text(date);
@@ -32,60 +23,26 @@ timeBlock.each(function() {
     }
 });
 
-
+//saves tasks to local storage
 var saveTask = function (event) {
-
+// loops through the textareas and saves values inside
     for (let i = 0; i < text.length; i++) {
         localStorage.setItem('task' + i, JSON.stringify(text[i].value));
-    };
+    }
+};
 
-  
-    // var nine = ($('#9').children('textarea').val());
-    // var ten = ($('#10').children('textarea').val());
-    // var eleven = ($('#11').children('textarea').val());
-    // var twelve = ($('#12').children('textarea').val());
-    // var thirteen = ($('#13').children('textarea').val());
-    // var fourteen = ($('#14').children('textarea').val());
-    // var fiveteen = ($('#15').children('textarea').val());
-    // var sixteen = ($('#16').children('textarea').val());
-    // var seventeen = ($('#17').children('textarea').val());
-    // //saves to local storage
-    // localStorage.setItem('9', JSON.stringify(nine))
-    // localStorage.setItem('10', JSON.stringify(ten))
-    // localStorage.setItem('11', JSON.stringify(eleven))
-    // localStorage.setItem('12', JSON.stringify(twelve))
-    // localStorage.setItem('13', JSON.stringify(thirteen))
-    // localStorage.setItem('14', JSON.stringify(fourteen))
-    // localStorage.setItem('15', JSON.stringify(fiveteen))
-    // localStorage.setItem('16', JSON.stringify(sixteen))
-    // localStorage.setItem('17', JSON.stringify(seventeen))
-}
+//get Tasks from local storage
+var getTasks = function (){
+// goes throught the local values and pulls them back on the page 
+    for (let i = 0; i < text.length; i++) {
+        var localVal = JSON.parse(localStorage.getItem('task' + i));
+        text[i].textContent = localVal;
+    }
+};
 
-
-// var getTasks = function (){
-//     //retrieves the data
-//     var nineVal = JSON.parse(localStorage.getItem('9'))
-//     var tenVal = JSON.parse(localStorage.getItem('10'))
-//     var elevenVal = JSON.parse(localStorage.getItem('11'))
-//     var twelveVal = JSON.parse(localStorage.getItem('12'))
-//     var thirteenVal = JSON.parse(localStorage.getItem('13'))
-//     var fourteenVal = JSON.parse(localStorage.getItem('14'))
-//     var fiveteenVal = JSON.parse(localStorage.getItem('15'))
-//     var sixteenVal = JSON.parse(localStorage.getItem('16'))
-//     var seventeeVal = JSON.parse(localStorage.getItem('17'))
-// //populates the blocks 
-//     nine.value = nineVal;
-//     ten.value = tenVal;
-//     eleven.value = elevenVal;
-//     twelve.value = twelveVal;
-//     thirteen.value = thirteenVal;
-//     fourteen.value = fourteenVal;
-//     fiveteen.value = fiveteenVal;
-//     sixteen.value = sixteenVal;
-//     seventeen.value = seventeeVal;
-// }
 // save btn event listener
 saveBtn.on('click', saveTask);
+getTasks();
 
 
 
