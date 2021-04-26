@@ -1,13 +1,17 @@
 // global variables
 var saveBtn = $('.saveBtn');
 var today = $('#currentDay');
+var timeDisplay = $('#displayTime')
 var date = moment().format('MMMM Do YYYY');
 var currentTime = parseInt(moment().format('H'));
+var displayedTime = moment().format('h:mm a');
 var timeBlock = $('.time-block');
 var text = $('textarea');
 
 //display current day
 today.text(date);
+//display the time
+timeDisplay.text(displayedTime);
 
 //loops thriugh the timeblocks
 timeBlock.each(function() {
